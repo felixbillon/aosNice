@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { IsNumber } from "class-validator";
 
-export interface Vector {
-  x: number;
-  y: number;
+export class Vector {
+  @IsNumber()
+  public x: number;
+  @IsNumber()
+  public y: number;
 }
 
 @Injectable()
 export class VectorService {
   round(vector: Vector): Vector {
-    return {
-      x: Math.round(vector.x),
-      y: Math.round(vector.y)
-    };
+    const v = new Vector();
+    v.x = Math.round(vector.x);
+    v.y = Math.round(vector.y);
+    return v;
   }
 
   length(vector: Vector): number {
@@ -19,31 +22,31 @@ export class VectorService {
   }
 
   add(vector1: Vector, vector2: Vector): Vector {
-    return {
-      x: vector1.x = vector1.x + vector2.x,
-      y: vector1.y = vector1.y + vector2.y
-    };
+    const v = new Vector();
+    v.x = vector1.x + vector2.x;
+    v.y = vector1.y + vector2.y;
+    return v;
   }
 
   substract(vector1: Vector, vector2: Vector): Vector {
-    return {
-      x: vector1.x - vector2.x,
-      y: vector1.y - vector2.y
-    };
+    const v = new Vector();
+    v.x = vector1.x - vector2.x;
+    v.y = vector1.y - vector2.y;
+    return v;
   }
 
   multiply(vector: Vector, x: number, y: number = x): Vector {
-    return {
-      x: vector.x * x,
-      y: vector.y * y
-    };
+    const v = new Vector();
+    v.x = vector.x * x;
+    v.y = vector.y * y;
+    return v;
   }
 
   divide(vector1: Vector, vector2: Vector): Vector {
-    return {
-      x: vector1.x / vector2.x,
-      y: vector1.y / vector2.y
-    };
+    const v = new Vector();
+    v.x = vector1.x / vector2.x;
+    v.y = vector1.y / vector2.y;
+    return v;
   }
 
   compare(vector1: Vector, vector2: Vector): boolean {
